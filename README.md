@@ -11,5 +11,6 @@ It contains users, vendors, categories, products, and cart operations.
 - Run php artisan db:seed to seed Users to db
 - <a href="https://github.com/teddywafula/laravelEcommerce/blob/master/LaravelEcom.postman_collection.json">Open the collection, adjust base url and run apis </a>
 - In .env add L5_SWAGGER_CONST_HOST= to your host ip. i.e L5_SWAGGER_CONST_HOST=http://127.0.0.1:8000
+- Run php artisan l5-swagger:generate to generate api documentation
 - Open swagger documentation at url you configured at L5_SWAGGER_CONST_HOST/api/documentation
 i.e =http://127.0.0.1:8000/api/documentation

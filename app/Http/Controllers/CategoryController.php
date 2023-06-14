@@ -8,13 +8,7 @@ use App\Models\Category;
 use CategoryFacades;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
-use OpenApi\Attributes as OA;
 
-/**
- * @OA\PathItem(
- *     path="/api/category",
- * )
- */
 class CategoryController extends Controller
 {
     /**
@@ -63,7 +57,7 @@ class CategoryController extends Controller
      *
      * @OA\Post(
      *      path="/api/category",
-     *      operationId="store",
+     *      operationId="storeCategory",
      *      tags={"Categories"},
      *      summary="Store category in DB",
      *      description="Store category in DB",
@@ -75,7 +69,7 @@ class CategoryController extends Controller
      *         ),
      *      ),
      *      @OA\Response(
-     *         response=200,
+     *         response=201,
      *         description="successful operation",
      *     ),
      *     @OA\Response(
@@ -97,6 +91,10 @@ class CategoryController extends Controller
      *      @OA\Response(
      *          response=422,
      *          description="Unprocessable content"
+     *      ),
+     *      @OA\Response(
+     *          response=500,
+     *          description="Internal server error"
      *      )
      *  )
      */
@@ -111,6 +109,9 @@ class CategoryController extends Controller
      * @OA\Get(
      *     tags={"Categories"},
      *     path="/api/category/{category}",
+     *     operationId="getCategory",
+     *     summary="Show category",
+     *     description="Show category",
      *     @OA\Parameter(name="category", in="path", description="Id of Category", required=true,
      *        @OA\Schema(type="integer")
      *    ),
@@ -149,9 +150,9 @@ class CategoryController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * * @OA\Put(
+     * @OA\Put(
      *      path="/api/category/{category}",
-     *      operationId="update",
+     *      operationId="updateCategory",
      *      tags={"Categories"},
      *      summary="Update category",
      *      description="Update category",
@@ -188,6 +189,10 @@ class CategoryController extends Controller
      *      @OA\Response(
      *          response=422,
      *          description="Unprocessable content"
+     *      ),
+     *      @OA\Response(
+     *          response=500,
+     *          description="Internal server error"
      *      )
      *  )
      */
@@ -201,7 +206,7 @@ class CategoryController extends Controller
      *
      * @OA\Delete(
      *    path="/api/category/{category}",
-     *    operationId="destroy",
+     *    operationId="destroyCategory",
      *    tags={"Categories"},
      *    summary="Delete Category",
      *    description="Delete Category",

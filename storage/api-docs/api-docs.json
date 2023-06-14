@@ -51,7 +51,7 @@
                 ],
                 "summary": "Store category in DB",
                 "description": "Store category in DB",
-                "operationId": "store",
+                "operationId": "storeCategory",
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -73,7 +73,7 @@
                     }
                 },
                 "responses": {
-                    "200": {
+                    "201": {
                         "description": "successful operation"
                     },
                     "401": {
@@ -90,6 +90,9 @@
                     },
                     "422": {
                         "description": "Unprocessable content"
+                    },
+                    "500": {
+                        "description": "Internal server error"
                     }
                 }
             }
@@ -99,8 +102,9 @@
                 "tags": [
                     "Categories"
                 ],
-                "summary": "Display the specified resource.",
-                "operationId": "3066bb42e69eebb086f181133f15b522",
+                "summary": "Show category",
+                "description": "Show category",
+                "operationId": "getCategory",
                 "parameters": [
                     {
                         "name": "category",
@@ -139,7 +143,7 @@
                 ],
                 "summary": "Update category",
                 "description": "Update category",
-                "operationId": "update",
+                "operationId": "updateCategory",
                 "parameters": [
                     {
                         "name": "category",
@@ -189,6 +193,9 @@
                     },
                     "422": {
                         "description": "Unprocessable content"
+                    },
+                    "500": {
+                        "description": "Internal server error"
                     }
                 }
             },
@@ -198,12 +205,587 @@
                 ],
                 "summary": "Delete Category",
                 "description": "Delete Category",
-                "operationId": "destroy",
+                "operationId": "destroyCategory",
                 "parameters": [
                     {
                         "name": "category",
                         "in": "path",
                         "description": "Id of Category",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "No content"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "404": {
+                        "description": "Not found"
+                    }
+                }
+            }
+        },
+        "/api/product": {
+            "get": {
+                "tags": [
+                    "Products"
+                ],
+                "summary": "Get List of Products",
+                "description": "Return List of Products",
+                "operationId": "getAllProducts",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {}
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "404": {
+                        "description": "Not found"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Products"
+                ],
+                "summary": "Store product in DB",
+                "description": "Store product in DB",
+                "operationId": "storeProduct",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name",
+                                    "category_id",
+                                    "vendor_id",
+                                    "price",
+                                    "quantity"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Jacket"
+                                    },
+                                    "category_id": {
+                                        "type": "integer",
+                                        "format": "integer",
+                                        "example": 1
+                                    },
+                                    "vendor_id": {
+                                        "type": "integer",
+                                        "format": "integer",
+                                        "example": 1
+                                    },
+                                    "price": {
+                                        "type": "number",
+                                        "format": "integer",
+                                        "example": 10.23
+                                    },
+                                    "quantity": {
+                                        "type": "integer",
+                                        "format": "integer",
+                                        "example": 100
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Jacket description"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "404": {
+                        "description": "Not found"
+                    },
+                    "422": {
+                        "description": "Unprocessable content"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/api/product/{product}": {
+            "get": {
+                "tags": [
+                    "Products"
+                ],
+                "summary": "Show product",
+                "description": "Show product",
+                "operationId": "getProduct",
+                "parameters": [
+                    {
+                        "name": "product",
+                        "in": "path",
+                        "description": "Id of product",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "404": {
+                        "description": "Not found"
+                    },
+                    "422": {
+                        "description": "Unprocessable content"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Products"
+                ],
+                "summary": "Update product",
+                "description": "Update product",
+                "operationId": "updateProduct",
+                "parameters": [
+                    {
+                        "name": "product",
+                        "in": "path",
+                        "description": "Id of product",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": false,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Jacket"
+                                    },
+                                    "category_id": {
+                                        "type": "integer",
+                                        "format": "integer",
+                                        "example": 1
+                                    },
+                                    "vendor_id": {
+                                        "type": "integer",
+                                        "format": "integer",
+                                        "example": 1
+                                    },
+                                    "price": {
+                                        "type": "number",
+                                        "format": "integer",
+                                        "example": 10.23
+                                    },
+                                    "quantity": {
+                                        "type": "integer",
+                                        "format": "integer",
+                                        "example": 100
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Jacket description"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "404": {
+                        "description": "Not found"
+                    },
+                    "422": {
+                        "description": "Unprocessable content"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Products"
+                ],
+                "summary": "Delete Products",
+                "description": "Delete Products",
+                "operationId": "destroy",
+                "parameters": [
+                    {
+                        "name": "product",
+                        "in": "path",
+                        "description": "Id of Product",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "No content"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "404": {
+                        "description": "Not found"
+                    }
+                }
+            }
+        },
+        "/api/vendor": {
+            "get": {
+                "tags": [
+                    "Vendors"
+                ],
+                "summary": "Get List of Vendors",
+                "description": "Return List of Vendors",
+                "operationId": "getAllVendors",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {}
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "404": {
+                        "description": "Not found"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Vendors"
+                ],
+                "summary": "Store vendor in DB",
+                "description": "Store vendor in DB",
+                "operationId": "storeVendor",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "first_name",
+                                    "last_name",
+                                    "company_name",
+                                    "phone",
+                                    "country",
+                                    "location",
+                                    "company_email",
+                                    "user_id"
+                                ],
+                                "properties": {
+                                    "first_name": {
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "John"
+                                    },
+                                    "middle_name": {
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Jack"
+                                    },
+                                    "last_name": {
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Doe "
+                                    },
+                                    "company_name": {
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Company Y"
+                                    },
+                                    "phone": {
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "+49 11111111"
+                                    },
+                                    "country": {
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Cameroon"
+                                    },
+                                    "location": {
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Address 123"
+                                    },
+                                    "company_email": {
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "aa@aa.aa"
+                                    },
+                                    "user_id": {
+                                        "type": "integer",
+                                        "format": "integer",
+                                        "example": 1
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "404": {
+                        "description": "Not found"
+                    },
+                    "422": {
+                        "description": "Unprocessable content"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/api/vendor/{vendor}": {
+            "get": {
+                "tags": [
+                    "Vendors"
+                ],
+                "summary": "Show vendor",
+                "description": "Show vendor",
+                "operationId": "getVendor",
+                "parameters": [
+                    {
+                        "name": "vendor",
+                        "in": "path",
+                        "description": "Id of vendor",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "404": {
+                        "description": "Not found"
+                    },
+                    "422": {
+                        "description": "Unprocessable content"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Vendors"
+                ],
+                "summary": "Update vendor",
+                "description": "Update vendor",
+                "operationId": "updateVendor",
+                "parameters": [
+                    {
+                        "name": "vendor",
+                        "in": "path",
+                        "description": "Id of vendor",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": false,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "first_name": {
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "John"
+                                    },
+                                    "middle_name": {
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Jack"
+                                    },
+                                    "last_name": {
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Doe "
+                                    },
+                                    "company_name": {
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Company Y"
+                                    },
+                                    "phone": {
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "+49 11111111"
+                                    },
+                                    "country": {
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Cameroon"
+                                    },
+                                    "location": {
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Address 123"
+                                    },
+                                    "company_email": {
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "aa@aa.aa"
+                                    },
+                                    "user_id": {
+                                        "type": "integer",
+                                        "format": "integer",
+                                        "example": 1
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "404": {
+                        "description": "Not found"
+                    },
+                    "422": {
+                        "description": "Unprocessable content"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Vendors"
+                ],
+                "summary": "Delete Vendor",
+                "description": "Delete Vendor",
+                "operationId": "destroyVendor",
+                "parameters": [
+                    {
+                        "name": "vendor",
+                        "in": "path",
+                        "description": "Id of Vendor",
                         "required": true,
                         "schema": {
                             "type": "integer"
