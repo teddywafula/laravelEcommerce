@@ -18,3 +18,4 @@ i.e =http://127.0.0.1:8000/api/documentation
 ### Deploying on AWS Lambda
 - you can install serverless on your machine
 - then go to root of project, modify env, then run sls (serverless) deploy
+- A url will be generated where you can access your application
