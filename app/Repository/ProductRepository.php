@@ -38,7 +38,7 @@ class ProductRepository implements ProductInterface
         return $product;
     }
 
-    public function update(array $data, Product $product)
+    public function update(array $data, Product $product): Product
     {
         if (!empty($data['name'])) {
             $product->name = $data['name'];
@@ -59,6 +59,25 @@ class ProductRepository implements ProductInterface
             $product->description = $data['description'];
         }
         $product->save();
+        return $product;
+    }
+
+    public function getSingleProduct($productId): ?Product
+    {
+        return Product::query()->where('id', '=', $productId)->first();
+    }
+    public function updateProductQuantity($productId, $quantity): ?Product
+    {
+        $product = $this->getSingleProduct($productId);
+        if (!empty($product)) {
+            $qty = $product->quantity;
+            $finalQuantity = $qty + $quantity;
+            if ($finalQuantity < 0 ) {
+                throw new \Exception("The stock cannot be negative");
+            }
+            $product->quantity = $finalQuantity;
+            $product->save();
+        }
         return $product;
     }
 }

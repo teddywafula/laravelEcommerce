@@ -25,13 +25,13 @@ Route::apiResources([
     'category' => CategoryController::class,
     'vendor' => VendorController::class,
     'product' => ProductController::class,
-//    'cart' => CartController::class,
 ]);
 
 Route::controller(CartController::class)->group(function() {
     Route::post('/cart/add-to-cart', 'addToCart');
     Route::post('/cart', 'createCart');
     Route::get('/cart', 'getCart');
+    Route::get('/cart/{id}/items', 'getCartItems');
     Route::delete('/cart/item/{id}', 'removeCartItem');
 });
 
