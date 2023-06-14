@@ -8,11 +8,53 @@ use App\Models\Category;
 use CategoryFacades;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
+use OpenApi\Attributes as OA;
 
+/**
+ * @OA\PathItem(
+ *     path="/category",
+ * )
+ */
 class CategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
+     */
+    /**
+     * Display a listing of the resource.
+     *
+     *
+     * @OA\Get(
+     *     path="/api/category",
+     *     operationId = "getAllcategories",
+     *     summary="Get List of Categories",
+     *     description="Return List of Categories",
+     *     tags={"category"},
+     *     @OA\Response(
+     *          response=200,
+     *          description="Successful operation",
+     *          @OA\MediaType(
+     *              mediaType="application/json",
+     *          )
+     *      ),
+     *      @OA\Response(
+     *          response=401,
+     *          description="Unauthenticated",
+     *      ),
+     *      @OA\Response(
+     *          response=403,
+     *          description="Forbidden"
+     *      ),
+     *      @OA\Response(
+     *          response=400,
+     *          description="Bad Request"
+     *      ),
+     *      @OA\Response(
+     *          response=404,
+     *          description="not found"
+     *      )
+     * )
+     *
      */
     public function index(): JsonResponse
     {
