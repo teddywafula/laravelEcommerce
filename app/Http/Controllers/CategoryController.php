@@ -48,7 +48,7 @@ class CategoryController extends Controller
      *      ),
      *      @OA\Response(
      *          response=404,
-     *          description="not found"
+     *          description="Not found"
      *      )
      * )
      *
@@ -61,6 +61,44 @@ class CategoryController extends Controller
     /**
      * Store a newly created resource in storage.
      *
+     * @OA\Post(
+     *      path="/api/category",
+     *      operationId="store",
+     *      tags={"Categories"},
+     *      summary="Store category in DB",
+     *      description="Store category in DB",
+     *      @OA\RequestBody(
+     *         required=true,
+     *         @OA\JsonContent(
+     *            required={"name"},
+     *            @OA\Property(property="name", type="string", format="string", example="Fashion"),
+     *         ),
+     *      ),
+     *      @OA\Response(
+     *         response=200,
+     *         description="successful operation",
+     *     ),
+     *     @OA\Response(
+     *          response=401,
+     *          description="Unauthenticated",
+     *      ),
+     *      @OA\Response(
+     *          response=403,
+     *          description="Forbidden"
+     *      ),
+     *      @OA\Response(
+     *          response=400,
+     *          description="Bad Request"
+     *      ),
+     *      @OA\Response(
+     *          response=404,
+     *          description="Not found"
+     *      ),
+     *      @OA\Response(
+     *          response=422,
+     *          description="Unprocessable content"
+     *      )
+     *  )
      */
     public function store(CategoryRequest $request): JsonResponse
     {
@@ -73,14 +111,33 @@ class CategoryController extends Controller
      * @OA\Get(
      *     tags={"Categories"},
      *     path="/api/category/{category}",
-     *      @OA\Parameter(name="category", in="path", description="Id of Category", required=true,
+     *     @OA\Parameter(name="category", in="path", description="Id of Category", required=true,
      *        @OA\Schema(type="integer")
      *    ),
      *     @OA\Response(
      *         response=200,
      *         description="successful operation",
-     *
-     *     )
+     *     ),
+     *     @OA\Response(
+     *          response=401,
+     *          description="Unauthenticated",
+     *      ),
+     *      @OA\Response(
+     *          response=403,
+     *          description="Forbidden"
+     *      ),
+     *      @OA\Response(
+     *          response=400,
+     *          description="Bad Request"
+     *      ),
+     *      @OA\Response(
+     *          response=404,
+     *          description="Not found"
+     *      ),
+     *      @OA\Response(
+     *          response=422,
+     *          description="Unprocessable content"
+     *      )
      * )
      *
      */
@@ -91,6 +148,48 @@ class CategoryController extends Controller
 
     /**
      * Update the specified resource in storage.
+     *
+     * * @OA\Put(
+     *      path="/api/category/{category}",
+     *      operationId="update",
+     *      tags={"Categories"},
+     *      summary="Update category",
+     *      description="Update category",
+     *     @OA\Parameter(name="category", in="path", description="Id of Category", required=true,
+     *        @OA\Schema(type="integer")
+     *    ),
+     *      @OA\RequestBody(
+     *         required=true,
+     *         @OA\JsonContent(
+     *            required={"name"},
+     *            @OA\Property(property="name", type="string", format="string", example="Fashion"),
+     *         ),
+     *      ),
+     *      @OA\Response(
+     *         response=200,
+     *         description="successful operation",
+     *     ),
+     *     @OA\Response(
+     *          response=401,
+     *          description="Unauthenticated",
+     *      ),
+     *      @OA\Response(
+     *          response=403,
+     *          description="Forbidden"
+     *      ),
+     *      @OA\Response(
+     *          response=400,
+     *          description="Bad Request"
+     *      ),
+     *      @OA\Response(
+     *          response=404,
+     *          description="Not found"
+     *      ),
+     *      @OA\Response(
+     *          response=422,
+     *          description="Unprocessable content"
+     *      )
+     *  )
      */
     public function update(CategoryRequest $request, Category $category): JsonResponse
     {
@@ -111,9 +210,25 @@ class CategoryController extends Controller
      *    ),
      *    @OA\Response(
      *         response=204,
-     *         description="Success",
-     *       )
+     *         description="No content",
+     *       ),
+     *      @OA\Response(
+     *          response=401,
+     *          description="Unauthenticated",
+     *      ),
+     *      @OA\Response(
+     *          response=403,
+     *          description="Forbidden"
+     *      ),
+     *      @OA\Response(
+     *          response=400,
+     *          description="Bad Request"
+     *      ),
+     *      @OA\Response(
+     *          response=404,
+     *          description="Not found"
      *      )
+     *    ),
      *  )
      *
      * @throws \Throwable
