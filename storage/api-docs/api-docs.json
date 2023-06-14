@@ -16,11 +16,10 @@
         }
     ],
     "paths": {
-        "/category": {},
         "/api/category": {
             "get": {
                 "tags": [
-                    "category"
+                    "Categories"
                 ],
                 "summary": "Get List of Categories",
                 "description": "Return List of Categories",
@@ -43,6 +42,55 @@
                     },
                     "404": {
                         "description": "not found"
+                    }
+                }
+            }
+        },
+        "/api/category/{category}": {
+            "get": {
+                "tags": [
+                    "Categories"
+                ],
+                "summary": "Display the specified resource.",
+                "operationId": "3066bb42e69eebb086f181133f15b522",
+                "parameters": [
+                    {
+                        "name": "category",
+                        "in": "path",
+                        "description": "Id of Category",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Categories"
+                ],
+                "summary": "Delete Category",
+                "description": "Delete Category",
+                "operationId": "destroy",
+                "parameters": [
+                    {
+                        "name": "category",
+                        "in": "path",
+                        "description": "Id of Category",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Success"
                     }
                 }
             }

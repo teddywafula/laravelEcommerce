@@ -12,14 +12,11 @@ use OpenApi\Attributes as OA;
 
 /**
  * @OA\PathItem(
- *     path="/category",
+ *     path="/api/category",
  * )
  */
 class CategoryController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     /**
      * Display a listing of the resource.
      *
@@ -29,7 +26,7 @@ class CategoryController extends Controller
      *     operationId = "getAllcategories",
      *     summary="Get List of Categories",
      *     description="Return List of Categories",
-     *     tags={"category"},
+     *     tags={"Categories"},
      *     @OA\Response(
      *          response=200,
      *          description="Successful operation",
@@ -63,6 +60,7 @@ class CategoryController extends Controller
 
     /**
      * Store a newly created resource in storage.
+     *
      */
     public function store(CategoryRequest $request): JsonResponse
     {
@@ -71,6 +69,20 @@ class CategoryController extends Controller
 
     /**
      * Display the specified resource.
+     *
+     * @OA\Get(
+     *     tags={"Categories"},
+     *     path="/api/category/{category}",
+     *      @OA\Parameter(name="category", in="path", description="Id of Category", required=true,
+     *        @OA\Schema(type="integer")
+     *    ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="successful operation",
+     *
+     *     )
+     * )
+     *
      */
     public function show(Category $category): JsonResponse
     {
@@ -87,6 +99,23 @@ class CategoryController extends Controller
 
     /**
      * Remove the specified resource from storage.
+     *
+     * @OA\Delete(
+     *    path="/api/category/{category}",
+     *    operationId="destroy",
+     *    tags={"Categories"},
+     *    summary="Delete Category",
+     *    description="Delete Category",
+     *    @OA\Parameter(name="category", in="path", description="Id of Category", required=true,
+     *        @OA\Schema(type="integer")
+     *    ),
+     *    @OA\Response(
+     *         response=204,
+     *         description="Success",
+     *       )
+     *      )
+     *  )
+     *
      * @throws \Throwable
      */
     public function destroy(Category $category): JsonResponse
