@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class CategoryRequest extends FormRequest
 {
@@ -21,9 +22,13 @@ class CategoryRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-            'name' => 'required'
+        $rules = [
+            'name' => ['required','unique' => 'unique:categories,name','regex:/^[a-zA-Z0-9\s]+$/']
         ];
+        if ($this->route('category')) {
+            $rules['name']['unique'] .= ','.$this->route('category')->id.',id';
+        }
+        return $rules;
     }
 
     public function messages(): array
