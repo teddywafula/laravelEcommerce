@@ -8,9 +8,9 @@ use App\Models\Category;
 class CategoryRepository implements CategoryInterface
 {
 
-    public function findAll(): \Illuminate\Database\Eloquent\Collection|array
+    public function findAll(): object
     {
-        return Category::all();
+        return Category::paginate();
     }
 
     public function save(array $data ): Category

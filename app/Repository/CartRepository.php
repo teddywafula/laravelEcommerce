@@ -58,9 +58,9 @@ class CartRepository implements CartInterface
         return $cartItem;
     }
 
-    public function getCartItems(int $cartId): \Illuminate\Database\Eloquent\Collection|array
+    public function getCartItems(int $cartId): object
     {
-        return CartItem::query()->where('cart_id', '=', $cartId)->get();
+        return CartItem::query()->where('cart_id', '=', $cartId)->paginate();
     }
 
     public function removeItemFromCart(int $cartItemId): void

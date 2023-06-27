@@ -8,9 +8,9 @@ use App\Models\Vendor;
 class VendorRepository implements VendorInterface
 {
 
-    public function findAll(): \Illuminate\Database\Eloquent\Collection
+    public function findAll(): object
     {
-        return Vendor::all();
+        return Vendor::paginate();
     }
 
     public function save(array $data): Vendor

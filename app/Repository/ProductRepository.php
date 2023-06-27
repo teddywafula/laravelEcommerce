@@ -9,9 +9,9 @@ use App\Models\Product;
 class ProductRepository implements ProductInterface
 {
 
-    public function findAll(): \Illuminate\Database\Eloquent\Collection
+    public function findAll(): object
     {
-        return Product::all();
+        return Product::paginate();
     }
 
     public function save(array $data ): Product
