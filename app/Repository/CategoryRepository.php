@@ -20,7 +20,9 @@ class CategoryRepository implements CategoryInterface
         if (!empty($data['name'])) {
             $category->name = $data['name'];
         }
+
         $category->save();
+
         return $category;
     }
 
@@ -29,7 +31,9 @@ class CategoryRepository implements CategoryInterface
         if (!empty($data['name'])) {
             $category->name = $data['name'];
         }
+
         $category->save();
+
         return $category;
     }
 }
