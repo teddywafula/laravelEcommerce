@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Contracts\ProductInterface;
+use App\Exceptions\OutOfStockException;
 use App\Models\Product;
 
 class ProductRepository implements ProductInterface
@@ -64,7 +65,7 @@ class ProductRepository implements ProductInterface
 
     public function getSingleProduct($productId): ?Product
     {
-        return Product::query()->where('id', '=', $productId)->first();
+        return Product::query()->where('id', '=', $productId)->sharedLock()->first();
     }
     public function updateProductQuantity($productId, $quantity): ?Product
     {
@@ -73,7 +74,7 @@ class ProductRepository implements ProductInterface
             $qty = $product->quantity;
             $finalQuantity = $qty + $quantity;
             if ($finalQuantity < 0 ) {
-                throw new \Exception("The stock cannot be negative");
+                throw new OutOfStockException("The stock cannot be negative");
             }
             $product->quantity = $finalQuantity;
             $product->save();
