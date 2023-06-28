@@ -36,11 +36,17 @@ class VendorRequest extends FormRequest
                 'required',
                 'email',
                 'unique'=> 'unique:vendors,company_email',
+            ],
+            'user_id' => [
+                'required',
+                'exists' => 'exists:App\Models\User,id',
+                'unique' => 'unique:vendors,user_id',
             ]
         ];
         if ($this->route('vendor')) {
             $rules['company_name']['unique'] .= ','.$this->route('vendor')->id.',id';
             $rules['company_email']['unique'] .= ','.$this->route('vendor')->id.',id';
+            $rules['user_id']['unique'] .= ','.$this->route('vendor')->user_id.',user_id';
         }
         return $rules;
     }

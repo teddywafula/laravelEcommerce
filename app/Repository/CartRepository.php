@@ -60,7 +60,7 @@ class CartRepository implements CartInterface
 
     public function getCartItems(int $cartId): object
     {
-        return CartItem::query()->where('cart_id', '=', $cartId)->paginate();
+        return CartItem::query()->where('cart_id', $cartId)->paginate();
     }
 
     public function removeItemFromCart(int $cartItemId): void
@@ -76,14 +76,14 @@ class CartRepository implements CartInterface
 
     public function getCart(int $userId): Cart
     {
-        return Cart::query()->where('user_id', '=', $userId)->first();
+        return Cart::query()->where('user_id', $userId)->first();
     }
 
     private function checkIfProductInCart($productId, $cartId): \Illuminate\Database\Eloquent\Builder
     {
         return CartItem::query()
-            ->where('product_id', '=', $productId)
-            ->where('cart_id', '=', $cartId);
+            ->where('product_id', $productId)
+            ->where('cart_id', $cartId);
     }
 
     public function addQuantityToProductInCart($quantity, $productId, $cartId): CartItem

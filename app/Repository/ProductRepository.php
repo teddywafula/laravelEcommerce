@@ -28,7 +28,7 @@ class ProductRepository implements ProductInterface
 
     public function getSingleProduct($productId): ?Product
     {
-        return Product::query()->where('id', '=', $productId)->sharedLock()->first();
+        return Product::query()->where('id',  $productId)->sharedLock()->first();
     }
 
     public function updateProductQuantity($productId, $quantity): ?Product
@@ -82,6 +82,10 @@ class ProductRepository implements ProductInterface
 
         if (!empty($data['description'])) {
             $product->description = $data['description'];
+        }
+
+        if (!empty($data['sku'])) {
+            $product->sku = $data['sku'];
         }
 
         $product->save();
